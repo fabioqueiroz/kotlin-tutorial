@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/firstBlankFragment">
+
+    <fragment
+        android:id="@+id/firstBlankFragment"
+        android:name="com.fq.navigationtutorial.FirstBlankFragment"
+        android:label="fragment_first_blank"
+        tools:layout="@layout/fragment_first_blank" >
+        <action
+            android:id="@+id/action_firstBlankFragment_to_secondBlankFragment"
+            app:destination="@id/secondBlankFragment" />
+        <action
+            android:id="@+id/action_firstBlankFragment_to_soundsFragment"
+            app:destination="@id/soundsFragment" />
+        <action
+            android:id="@+id/action_firstBlankFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment" />
+        <action
+            android:id="@+id/action_firstBlankFragment_to_drawingFragment"
+            app:destination="@id/drawingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondBlankFragment"
+        android:name="com.fq.navigationtutorial.SecondBlankFragment"
+        android:label="fragment_second_blank"
+        tools:layout="@layout/fragment_second_blank" />
+    <fragment
+        android:id="@+id/soundsFragment"
+        android:name="com.fq.navigationtutorial.SoundsFragment"
+        android:label="fragment_sounds"
+        tools:layout="@layout/fragment_sounds" />
+    <fragment
+        android:id="@+id/surveyFragment"
+        android:name="com.fq.navigationtutorial.SurveyFragment"
+        android:label="fragment_survey"
+        tools:layout="@layout/fragment_survey" >
+        <action
+            android:id="@+id/action_surveyFragment_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCardFragment"
+        android:name="com.fq.navigationtutorial.AddCardFragment"
+        android:label="fragment_add_card"
+        tools:layout="@layout/fragment_add_card" >
+        <action
+            android:id="@+id/action_addCardFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/drawingFragment"
+        android:name="com.fq.navigationtutorial.DrawingFragment"
+        android:label="drawing_fragment"
+        tools:layout="@layout/drawing_fragment" />
+</navigation>
