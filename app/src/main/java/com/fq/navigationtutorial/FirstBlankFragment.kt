@@ -62,6 +62,10 @@ class FirstBlankFragment : Fragment() {
         binding.drawButton.setOnClickListener {
             navController.navigate(R.id.action_firstBlankFragment_to_drawingFragment)
         }
+
+        binding.animationButton.setOnClickListener {
+            navController.navigate(R.id.action_firstBlankFragment_to_animationFragment)
+        }
     }
 
     override fun onCreateView(

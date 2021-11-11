@@ -9,14 +9,12 @@
     tools:context=".FirstBlankFragment">
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/surveyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#009688"
-        android:text="Next"
-        android:textColor="#ECECEC"
-        app:layout_constraintBottom_toTopOf="@+id/soundsButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Survey"
+        app:layout_constraintBottom_toTopOf="@+id/drawButton"
+        app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,32 +24,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sounds"
-        app:layout_constraintBottom_toTopOf="@+id/surveyButton"
+        app:layout_constraintBottom_toTopOf="@+id/animationButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/drawButton"
         app:layout_constraintTop_toBottomOf="@+id/nextButton" />
-
-    <Button
-        android:id="@+id/surveyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Survey"
-        app:layout_constraintBottom_toTopOf="@+id/drawButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soundsButton" />
 
     <Button
         android:id="@+id/drawButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Draw"
+        app:layout_constraintBottom_toTopOf="@+id/animationButton"
+        app:layout_constraintEnd_toStartOf="@+id/soundsButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surveyButton" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="Next"
+        android:textColor="#ECECEC"
+        app:layout_constraintBottom_toTopOf="@+id/soundsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/surveyButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/animationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surveyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/soundsButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

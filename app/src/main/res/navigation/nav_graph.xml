@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_firstBlankFragment_to_drawingFragment"
             app:destination="@id/drawingFragment" />
+        <action
+            android:id="@+id/action_firstBlankFragment_to_animationFragment"
+            app:destination="@id/animationFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondBlankFragment"
@@ -56,4 +59,9 @@
         android:name="com.fq.navigationtutorial.DrawingFragment"
         android:label="drawing_fragment"
         tools:layout="@layout/drawing_fragment" />
+    <fragment
+        android:id="@+id/animationFragment"
+        android:name="com.fq.navigationtutorial.AnimationFragment"
+        android:label="fragment_animation"
+        tools:layout="@layout/fragment_animation" />
 </navigation>
