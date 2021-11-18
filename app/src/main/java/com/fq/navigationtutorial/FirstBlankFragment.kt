@@ -66,6 +66,10 @@ class FirstBlankFragment : Fragment() {
         binding.animationButton.setOnClickListener {
             navController.navigate(R.id.action_firstBlankFragment_to_animationFragment)
         }
+
+        binding.sensorButton.setOnClickListener {
+            navController.navigate(R.id.action_firstBlankFragment_to_sensorFragment)
+        }
     }
 
     override fun onCreateView(

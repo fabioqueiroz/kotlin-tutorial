@@ -9,6 +9,28 @@
     tools:context=".FirstBlankFragment">
 
     <Button
+        android:id="@+id/animationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sensorButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawButton" />
+
+    <Button
+        android:id="@+id/soundsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sounds"
+        app:layout_constraintBottom_toTopOf="@+id/sensorButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/drawButton"
+        app:layout_constraintTop_toBottomOf="@+id/nextButton" />
+
+    <Button
         android:id="@+id/surveyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,28 +40,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/soundsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sounds"
-        app:layout_constraintBottom_toTopOf="@+id/animationButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/drawButton"
-        app:layout_constraintTop_toBottomOf="@+id/nextButton" />
-
-    <Button
-        android:id="@+id/drawButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Draw"
-        app:layout_constraintBottom_toTopOf="@+id/animationButton"
-        app:layout_constraintEnd_toStartOf="@+id/soundsButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surveyButton" />
 
     <Button
         android:id="@+id/nextButton"
@@ -55,14 +55,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/animationButton"
+        android:id="@+id/drawButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Animation"
+        android:text="Draw"
+        app:layout_constraintBottom_toTopOf="@+id/animationButton"
+        app:layout_constraintEnd_toStartOf="@+id/soundsButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surveyButton" />
+
+    <Button
+        android:id="@+id/sensorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sensor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/animationButton"
         app:layout_constraintTop_toBottomOf="@+id/soundsButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

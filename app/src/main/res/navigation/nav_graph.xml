@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_firstBlankFragment_to_animationFragment"
             app:destination="@id/animationFragment" />
+        <action
+            android:id="@+id/action_firstBlankFragment_to_sensorFragment"
+            app:destination="@id/sensorFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondBlankFragment"
@@ -64,4 +67,9 @@
         android:name="com.fq.navigationtutorial.AnimationFragment"
         android:label="fragment_animation"
         tools:layout="@layout/fragment_animation" />
+    <fragment
+        android:id="@+id/sensorFragment"
+        android:name="com.fq.navigationtutorial.SensorFragment"
+        android:label="fragment_sensor"
+        tools:layout="@layout/fragment_sensor" />
 </navigation>
