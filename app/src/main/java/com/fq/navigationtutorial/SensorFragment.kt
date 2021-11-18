@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnLayout
+import com.fq.navigationtutorial.databinding.FragmentSensorBinding
+import com.fq.navigationtutorial.databinding.FragmentSurveyBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +29,7 @@ class SensorFragment : Fragment(),  SensorEventListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: FragmentSensorBinding
     lateinit var sensorManager: SensorManager
     lateinit var accelerometer: Sensor
 
@@ -42,7 +46,9 @@ class SensorFragment : Fragment(),  SensorEventListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sensor, container, false)
+        //return inflater.inflate(R.layout.fragment_sensor, container, false)
+        binding = FragmentSensorBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,6 +96,18 @@ class SensorFragment : Fragment(),  SensorEventListener {
 
             var position = "%.2f".format(x) + " %.2f".format(y) + " %.2f".format(z)
             Log.d("Position", position)
+
+            var w:Int=0
+            var h:Int=0
+
+            binding.sensorView.doOnLayout {
+                w = it.measuredWidth
+                h = it.measuredHeight
+            }
+
+            binding.sensorView.sensorX = w/2f + x * 20f
+            binding.sensorView.sensorY = h/2f + z *20f
+            binding.sensorView.invalidate();
         }
 
     }
