@@ -1,11 +1,15 @@
 package com.fq.navigationtutorial
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.fq.navigationtutorial.databinding.FragmentSecondBlankBinding
 import com.fq.navigationtutorial.databinding.FragmentSoundsBinding
 
@@ -25,6 +29,16 @@ class SoundsFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentSoundsBinding
     private lateinit var catFightMedia : MediaPlayer
+    private lateinit var ballImage: ImageView
+
+    @SuppressLint("ClickableViewAccessibility")
+    val listener = View.OnTouchListener { view, motionEvent ->
+        if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+            view.y = motionEvent.rawY - view.height/2
+            view.x = motionEvent.rawX - view.width/2
+        }
+        true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +55,7 @@ class SoundsFragment : Fragment() {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_sounds, container, false)
         binding = FragmentSoundsBinding.inflate(inflater, container, false)
+        binding.ballImageView.setOnTouchListener(listener)
         return  binding.root
     }
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -29,6 +30,7 @@ class SurveyFragment : Fragment() {
     lateinit var surveyViewModel: SurveyViewModel
     lateinit var surveyAdapter: SurveyAdapter
     private lateinit var navController: NavController
+    private lateinit var spinner: Spinner //= findViewById(R.id.spinner)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

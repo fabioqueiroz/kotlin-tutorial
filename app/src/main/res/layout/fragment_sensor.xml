@@ -9,12 +9,21 @@
 
     <com.fq.navigationtutorial.SensorView
         android:id="@+id/sensorView"
-        android:layout_width="314dp"
-        android:layout_height="349dp"
+        android:layout_width="337dp"
+        android:layout_height="559dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.589"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498" />
+
+    <ImageView
+        android:id="@+id/sensorPicImageView"
+        android:layout_width="110dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="306dp"
+        android:src="@drawable/ball1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="159dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,17 @@
 package com.fq.navigationtutorial
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -53,6 +59,40 @@ class AddCardFragment : Fragment() {
         navController = findNavController()
         surveyViewModel = ViewModelProvider(requireActivity()).get(SurveyViewModel::class.java)
         var surveyModel = surveyViewModel.surveyLiveModel.value
+
+//        //////// test
+//        var spinner: Spinner = binding.addCardSpinner.findViewById(R.id.addCardSpinner)
+//        ArrayAdapter.createFromResource(
+//            binding.addCardSpinner.context,
+//            R.array.image_options,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            spinner.adapter = adapter
+//        }
+//        Log.d("spinner", spinner.count.toString())
+//        /////////////////
+
+        ////// test 2
+//        val data = arrayOf("Java", "Python", "C++", "C#", "Angular", "Go")
+//
+//        val adapter = ArrayAdapter(this, R.layout.spinner_item_selected, data)
+//        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+//
+//        val spinner = binding.addCardSpinner.findViewById<Spinner>(R.id.spinner)
+//        spinner.adapter = adapter
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//                Toast.makeText(this@AddCardFragment, parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {
+//
+//            }
+//        }
+        /////////////////
 
         binding.submitCardButton.setOnClickListener {
             navController.navigate(R.id.action_addCardFragment_to_surveyFragment)

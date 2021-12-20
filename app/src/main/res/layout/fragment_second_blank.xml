@@ -5,8 +5,19 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2196F3"
+    android:background="#A8BFD1"
     tools:context=".SecondBlankFragment">
+
+    <Spinner
+        android:id="@+id/testSpinner"
+        android:layout_width="146dp"
+        android:layout_height="22dp"
+        android:entries="@array/test_options"
+        app:layout_constraintBottom_toTopOf="@+id/test2Spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -15,9 +26,41 @@
         android:text="TextView"
         android:textColor="#E4DDDD"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/testSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/test2Spinner"
+        android:layout_width="146dp"
+        android:layout_height="22dp"
+        android:entries="@array/test2_options"
+        app:layout_constraintBottom_toTopOf="@+id/test3Spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/testSpinner" />
+
+    <Button
+        android:id="@+id/spinnerTestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Spinners"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/test3Spinner" />
+
+    <Spinner
+        android:id="@+id/test3Spinner"
+        android:layout_width="146dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerTestButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/test2Spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

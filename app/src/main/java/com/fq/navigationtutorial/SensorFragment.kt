@@ -1,5 +1,6 @@
 package com.fq.navigationtutorial
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnLayout
@@ -33,6 +35,15 @@ class SensorFragment : Fragment(),  SensorEventListener {
     lateinit var sensorManager: SensorManager
     lateinit var accelerometer: Sensor
 
+    @SuppressLint("ClickableViewAccessibility")
+    val listener = View.OnTouchListener { view, motionEvent ->
+        if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+            view.y = motionEvent.rawY - view.height/2
+            view.x = motionEvent.rawX - view.width/2
+        }
+        true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,6 +59,7 @@ class SensorFragment : Fragment(),  SensorEventListener {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_sensor, container, false)
         binding = FragmentSensorBinding.inflate(inflater, container, false)
+        binding.sensorPicImageView.setOnTouchListener(listener)
         return binding.root
     }
 
