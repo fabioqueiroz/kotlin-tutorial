@@ -3,6 +3,7 @@ package com.fq.navigationtutorial
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AddCardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AddCardFragment : Fragment() {
+class AddCardFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -60,39 +61,22 @@ class AddCardFragment : Fragment() {
         surveyViewModel = ViewModelProvider(requireActivity()).get(SurveyViewModel::class.java)
         var surveyModel = surveyViewModel.surveyLiveModel.value
 
-//        //////// test
-//        var spinner: Spinner = binding.addCardSpinner.findViewById(R.id.addCardSpinner)
-//        ArrayAdapter.createFromResource(
-//            binding.addCardSpinner.context,
-//            R.array.image_options,
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            // Apply the adapter to the spinner
-//            spinner.adapter = adapter
-//        }
-//        Log.d("spinner", spinner.count.toString())
-//        /////////////////
+        // dynamic card spinner list
+        var cardSpinner:Spinner = binding.addCardSpinner // android:entries="@array/image_options"
 
-        ////// test 2
-//        val data = arrayOf("Java", "Python", "C++", "C#", "Angular", "Go")
-//
-//        val adapter = ArrayAdapter(this, R.layout.spinner_item_selected, data)
-//        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-//
-//        val spinner = binding.addCardSpinner.findViewById<Spinner>(R.id.spinner)
-//        spinner.adapter = adapter
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-//                Toast.makeText(this@AddCardFragment, parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show()
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>) {
-//
-//            }
-//        }
-        /////////////////
+        var arrayAdapter = ArrayAdapter(cardSpinner.context, android.R.layout.simple_spinner_item, Data.getCardSpinnerOptions())
+        arrayAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice)
+
+        with(cardSpinner)
+        {
+            adapter = arrayAdapter
+            setSelection(0, false)
+            //onItemSelectedListener = this@AddCardFragment // crashes the application
+            prompt = "Select your favourite place"
+            gravity = android.view.Gravity.CENTER
+        }
+        /////////////
+
 
         binding.submitCardButton.setOnClickListener {
             navController.navigate(R.id.action_addCardFragment_to_surveyFragment)
@@ -132,5 +116,13 @@ class AddCardFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }

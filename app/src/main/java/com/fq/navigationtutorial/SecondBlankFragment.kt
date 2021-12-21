@@ -1,6 +1,8 @@
 package com.fq.navigationtutorial
 
 import android.R
+import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -10,10 +12,12 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fq.navigationtutorial.databinding.FragmentSecondBlankBinding
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +38,11 @@ class SecondBlankFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var testSpinner: Spinner
     private lateinit var test2Spinner: Spinner
     private lateinit var test3Spinner: Spinner
+    private var q1Score: Int = 0
+    private var q2Score: Int = 0
+    private var q3Score: Int = 0
 
-    var languages = arrayOf("Java", "PHP", "Kotlin", "Javascript", "Python", "Swift")
+    //var languages = arrayOf("Java", "PHP", "Kotlin", "Javascript", "Python", "Swift")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,22 +83,51 @@ class SecondBlankFragment : Fragment(), AdapterView.OnItemSelectedListener {
         test3Spinner = binding.test3Spinner
 
         var arrayAdapter = ArrayAdapter(binding.test3Spinner.context, R.layout.simple_spinner_item, Data.getLanguages())
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        arrayAdapter.setDropDownViewResource(R.layout.select_dialog_singlechoice)
 
         with(test3Spinner)
         {
             adapter = arrayAdapter
             setSelection(0, false)
-            onItemSelectedListener = this@SecondBlankFragment
+            onItemSelectedListener = this@SecondBlankFragment // **** not always needed ****
             prompt = "Select your favourite language"
             gravity = Gravity.CENTER
         }
+
+
 
         binding.spinnerTestButton.setOnClickListener {
             Log.d("test spinners", testSpinner.selectedItem.toString()
                     + ", " + test2Spinner.selectedItem.toString()
                     + ", " + test3Spinner.selectedItem.toString())
+
+            var score = calculateScore().toString() + "/60"
+            Toast.makeText(this@SecondBlankFragment.context, "Score: $score", Toast.LENGTH_LONG).show()
+
+            // progress bar and score result
+            binding.lineProgressBar.max = 60
+            ObjectAnimator.ofInt(binding.lineProgressBar, "progress", calculateScore())
+                .setDuration(2000)
+                .start()
+
+            binding.scoreTextView.text = score
         }
+    }
+
+    private fun calculateScore(): Int {
+        q1Score = when(testSpinner.selectedItem){
+            "Test 1" -> 20
+            else -> 0
+        }
+        q2Score = when(test2Spinner.selectedItem){
+            "Test 4" -> 20
+            else -> 0
+        }
+        q3Score = when(test3Spinner.selectedItem){
+            "Kotlin" -> 20
+            else -> 0
+        }
+        return q1Score + q2Score + q3Score
     }
 
     companion object {
@@ -118,6 +154,11 @@ class SecondBlankFragment : Fragment(), AdapterView.OnItemSelectedListener {
         Log.d("test spinners", testSpinner.selectedItem.toString()
                 + ", **** " + test2Spinner.selectedItem.toString()
                 + ", **** " + test3Spinner.selectedItem.toString())
+
+
+        //Toast.makeText(test3Spinner.context, test3Spinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
+//        var score = calculateScore().toString() + "/100"
+//        Toast.makeText(this@SecondBlankFragment.context, "Score: $score", Toast.LENGTH_LONG).show()
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
