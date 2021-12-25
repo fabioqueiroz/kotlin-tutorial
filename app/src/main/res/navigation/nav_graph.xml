@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_firstBlankFragment_to_sensorFragment"
             app:destination="@id/sensorFragment" />
+        <action
+            android:id="@+id/action_firstBlankFragment_to_dragAndDropFragment"
+            app:destination="@id/dragAndDropFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondBlankFragment"
@@ -72,4 +75,9 @@
         android:name="com.fq.navigationtutorial.SensorFragment"
         android:label="fragment_sensor"
         tools:layout="@layout/fragment_sensor" />
+    <fragment
+        android:id="@+id/dragAndDropFragment"
+        android:name="com.fq.navigationtutorial.DragAndDropFragment"
+        android:label="fragment_drag_and_drop"
+        tools:layout="@layout/fragment_drag_and_drop" />
 </navigation>

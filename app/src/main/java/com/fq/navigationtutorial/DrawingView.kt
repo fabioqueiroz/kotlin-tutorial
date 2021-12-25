@@ -48,4 +48,8 @@ class DrawingView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         bitmap = Bitmap.createBitmap(drawWidth, drawHeight, Bitmap.Config.RGB_565)
         bitmapCanvas = Canvas(bitmap)
     }
+
+    fun clearCanvas(){
+        bitmapCanvas.drawColor(Color.BLACK)
+    }
 }

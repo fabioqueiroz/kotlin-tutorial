@@ -70,6 +70,10 @@ class FirstBlankFragment : Fragment() {
         binding.sensorButton.setOnClickListener {
             navController.navigate(R.id.action_firstBlankFragment_to_sensorFragment)
         }
+
+        binding.dragButton.setOnClickListener {
+            navController.navigate(R.id.action_firstBlankFragment_to_dragAndDropFragment)
+        }
     }
 
     override fun onCreateView(

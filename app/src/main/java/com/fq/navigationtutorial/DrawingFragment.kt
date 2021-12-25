@@ -1,8 +1,13 @@
 package com.fq.navigationtutorial
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.PorterDuff
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.Display
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +57,24 @@ class DrawingFragment : Fragment() {
                 binding.colourButton.text = "GREEN"
             }
             isGreenBkg = !isGreenBkg
+        }
+
+        binding.randomTextButton.setOnClickListener {
+            var randomInt = (0..5).random()
+            var languages = arrayOf("Java", "PHP", "Kotlin", "Javascript", "Python", "Swift")
+            binding.randomTextView.text = languages[randomInt]
+        }
+
+        binding.clearButton.setOnClickListener {
+            binding.drawingView.clearCanvas()
+
+//            // pop up test
+//            val intent = Intent(this@DrawingFragment.context, PopUpWindow::class.java)
+//            intent.putExtra("popuptitle", "Error")
+//            intent.putExtra("popuptext", "Sorry, that email address is already used!")
+//            intent.putExtra("popupbtn", "OK")
+//            intent.putExtra("darkstatusbar", false)
+//            startActivity(intent)
         }
     }
 }
