@@ -32,45 +32,6 @@ class DragAndDropFragment : Fragment()   { // View.OnDragListener
     private var param2: String? = null
     private lateinit var binding: FragmentDragAndDropBinding
 
-    private val dragListener = View.OnDragListener { view, dragEvent ->
-        Log.d("drag", dragEvent.action.toString())
-        when(dragEvent.action){
-            DragEvent.ACTION_DRAG_STARTED -> {
-                dragEvent.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
-                true
-            }
-            DragEvent.ACTION_DRAG_ENTERED -> {
-                view.invalidate()
-                true
-            }
-            DragEvent.ACTION_DRAG_LOCATION -> true
-            DragEvent.ACTION_DRAG_EXITED -> {
-                view.invalidate()
-                true
-            }
-            DragEvent.ACTION_DROP -> {
-                val item = dragEvent.clipData.getItemAt(0)
-                val dragData = item.text
-                Toast.makeText(this@DragAndDropFragment.context, dragData, Toast.LENGTH_SHORT).show()
-
-                view.invalidate()
-
-                val v = dragEvent.localState as View
-                val owner = v.parent as ViewGroup
-                owner.removeView(v)
-
-                val destination = view as LinearLayout
-                destination.addView(v)
-                v.visibility = View.VISIBLE
-                true
-            }
-            DragEvent.ACTION_DRAG_ENDED -> {
-                view.invalidate()
-                true
-            }
-            else -> false
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,6 +71,58 @@ class DragAndDropFragment : Fragment()   { // View.OnDragListener
 
             it.visibility = View.INVISIBLE
             true
+        }
+        binding.dragImageView.setOnLongClickListener {
+            val clipText = "Image view text"
+            val item = ClipData.Item(clipText)
+            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
+            val data = ClipData(clipText, mimeTypes, item)
+
+            val dragShadowBuilder = View.DragShadowBuilder(it)
+            it.startDragAndDrop(data, dragShadowBuilder, it, 0)
+
+            it.visibility = View.INVISIBLE
+            true
+        }
+    }
+
+    private val dragListener = View.OnDragListener { view, dragEvent ->
+        Log.d("drag", dragEvent.action.toString())
+        when(dragEvent.action){
+            DragEvent.ACTION_DRAG_STARTED -> {
+                dragEvent.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
+                true
+            }
+            DragEvent.ACTION_DRAG_ENTERED -> {
+                view.invalidate()
+                true
+            }
+            DragEvent.ACTION_DRAG_LOCATION -> true
+            DragEvent.ACTION_DRAG_EXITED -> {
+                view.invalidate()
+                true
+            }
+            DragEvent.ACTION_DROP -> {
+                val item = dragEvent.clipData.getItemAt(0)
+                val dragData = item.text
+                Toast.makeText(this@DragAndDropFragment.context, dragData, Toast.LENGTH_SHORT).show()
+
+                view.invalidate()
+
+                val v = dragEvent.localState as View
+                val owner = v.parent as ViewGroup
+                owner.removeView(v)
+
+                val destination = view as LinearLayout
+                destination.addView(v)
+                v.visibility = View.VISIBLE
+                true
+            }
+            DragEvent.ACTION_DRAG_ENDED -> {
+                view.invalidate()
+                true
+            }
+            else -> false
         }
     }
 

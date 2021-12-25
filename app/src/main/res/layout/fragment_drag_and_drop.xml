@@ -21,7 +21,16 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginRight="180dp"
             android:background="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/dragImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="-50dp"
+            android:src="@drawable/ball2" />
 
     </LinearLayout>
 
