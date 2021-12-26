@@ -119,18 +119,20 @@ class DragAndDropFragment : Fragment() {
                 destination.addView(v)
                 v.visibility = View.VISIBLE
 
-                if(destination == binding.llBottom) {
-                    Toast.makeText(this@DragAndDropFragment.context, dragData, Toast.LENGTH_SHORT).show()
+                var draggedObject = when(dragData.toString()) {
+                    "Test ClipData text" -> "Black Box"
+                    "Image view text" -> "Ball Image"
+                    else -> ""
                 }
 
-                if(destination == binding.newDropArea) {
-                    var draggedObject = when(item.text.toString()) {
-                        "Test ClipData text" -> "Black Box"
-                        "Image view text" -> "Ball Image"
-                        else -> ""
-                    }
-                    Toast.makeText(this@DragAndDropFragment.context, "Orange area - $draggedObject", Toast.LENGTH_SHORT).show()
+                if(destination == binding.llBottom && draggedObject == "Black Box" ||
+                    destination == binding.newDropArea && draggedObject == "Ball Image") {
+                    Toast.makeText(this@DragAndDropFragment.context, "Correct: $draggedObject", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(this@DragAndDropFragment.context, "Wrong object: $draggedObject", Toast.LENGTH_SHORT).show()
                 }
+
                 true
             }
             DragEvent.ACTION_DRAG_ENDED -> {

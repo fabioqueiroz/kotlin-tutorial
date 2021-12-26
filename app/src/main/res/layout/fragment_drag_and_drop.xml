@@ -37,20 +37,42 @@
     <LinearLayout
         android:id="@+id/llBottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:orientation="horizontal"
         android:background="@android:color/holo_blue_light"
         android:gravity="center"
         android:layout_weight="1">
 
-        <LinearLayout
-            android:id="@+id/newDropArea"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:background="@android:color/holo_orange_dark"
-            android:gravity="center"
-            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/llBottomTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:text="Black Box"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/newDropArea"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/newDropAreaTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:text="Ball Image"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
