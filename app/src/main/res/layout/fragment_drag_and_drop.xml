@@ -41,6 +41,18 @@
         android:orientation="horizontal"
         android:background="@android:color/holo_blue_light"
         android:gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/newDropArea"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:background="@android:color/holo_orange_dark"
+            android:gravity="center"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

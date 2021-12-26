@@ -26,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [DragAndDropFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DragAndDropFragment : Fragment()   { // View.OnDragListener
+class DragAndDropFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -60,6 +60,8 @@ class DragAndDropFragment : Fragment()   { // View.OnDragListener
     private fun attachOnDragListener() {
         binding.llTop.setOnDragListener(dragListener)
         binding.llBottom.setOnDragListener(dragListener)
+        binding.newDropArea.setOnDragListener(dragListener)
+
         binding.dragView.setOnLongClickListener {
             val clipText = "Test ClipData text"
             val item = ClipData.Item(clipText)
@@ -87,13 +89,13 @@ class DragAndDropFragment : Fragment()   { // View.OnDragListener
     }
 
     private val dragListener = View.OnDragListener { view, dragEvent ->
-        Log.d("drag", dragEvent.action.toString())
         when(dragEvent.action){
             DragEvent.ACTION_DRAG_STARTED -> {
                 dragEvent.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
                 true
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
+                binding.llBottom.alpha = 0.5f
                 view.invalidate()
                 true
             }
@@ -103,9 +105,9 @@ class DragAndDropFragment : Fragment()   { // View.OnDragListener
                 true
             }
             DragEvent.ACTION_DROP -> {
+                binding.llBottom.alpha = 1.0f
                 val item = dragEvent.clipData.getItemAt(0)
                 val dragData = item.text
-                Toast.makeText(this@DragAndDropFragment.context, dragData, Toast.LENGTH_SHORT).show()
 
                 view.invalidate()
 
@@ -116,6 +118,19 @@ class DragAndDropFragment : Fragment()   { // View.OnDragListener
                 val destination = view as LinearLayout
                 destination.addView(v)
                 v.visibility = View.VISIBLE
+
+                if(destination == binding.llBottom) {
+                    Toast.makeText(this@DragAndDropFragment.context, dragData, Toast.LENGTH_SHORT).show()
+                }
+
+                if(destination == binding.newDropArea) {
+                    var draggedObject = when(item.text.toString()) {
+                        "Test ClipData text" -> "Black Box"
+                        "Image view text" -> "Ball Image"
+                        else -> ""
+                    }
+                    Toast.makeText(this@DragAndDropFragment.context, "Orange area - $draggedObject", Toast.LENGTH_SHORT).show()
+                }
                 true
             }
             DragEvent.ACTION_DRAG_ENDED -> {
