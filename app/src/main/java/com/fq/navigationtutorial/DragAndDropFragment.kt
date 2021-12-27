@@ -2,6 +2,8 @@ package com.fq.navigationtutorial
 
 import android.content.ClipData
 import android.content.ClipDescription
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.DragEvent
@@ -85,6 +87,13 @@ class DragAndDropFragment : Fragment() {
         setClickListenerToImage(binding.dragCoffeeImageView, "Coffee image text")
     }
 
+    private fun setAlphaValue(value: Float) {
+        binding.cardAreaOne.alpha = value
+        binding.cardAreaTwo.alpha = value
+        binding.cardAreaThree.alpha = value
+        binding.cardAreaFour.alpha = value
+    }
+
     private val dragListener = View.OnDragListener { view, dragEvent ->
         when(dragEvent.action){
             DragEvent.ACTION_DRAG_STARTED -> {
@@ -92,7 +101,7 @@ class DragAndDropFragment : Fragment() {
                 true
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
-                binding.cardAreaOne.alpha = 0.5f
+                setAlphaValue(0.5f)
                 view.invalidate()
                 true
             }
@@ -102,7 +111,7 @@ class DragAndDropFragment : Fragment() {
                 true
             }
             DragEvent.ACTION_DROP -> {
-                binding.cardAreaOne.alpha = 1.0f
+                setAlphaValue(1.0f)
                 val item = dragEvent.clipData.getItemAt(0)
                 val dragData = item.text
 
