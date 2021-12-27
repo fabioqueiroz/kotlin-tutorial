@@ -74,8 +74,8 @@ class DragAndDropFragment : Fragment() {
 
     private fun attachOnDragListener() {
         setDragListenerToArea(binding.imageSourceArea)
-        setDragListenerToArea(binding.cardAreaOne)
-        setDragListenerToArea(binding.cardAreaTwo)
+        setDragListenerToArea(binding.imageDropAreaOne)
+        setDragListenerToArea(binding.imageDropAreaTwo)
         setDragListenerToArea(binding.imageDropAreaThree)
         setDragListenerToArea(binding.imageDropAreaFour)
 
@@ -124,8 +124,8 @@ class DragAndDropFragment : Fragment() {
                     else -> ""
                 }
 
-                if(destination == binding.cardAreaOne && draggedObject == "Black Box" ||
-                    destination == binding.cardAreaTwo && draggedObject == "Ball Image") {
+                if(destination == binding.imageDropAreaOne && draggedObject == "Black Box" ||
+                    destination == binding.imageDropAreaTwo && draggedObject == "Ball Image") {
                     Toast.makeText(this@DragAndDropFragment.context, "Correct: $draggedObject", Toast.LENGTH_SHORT).show()
                     //binding.dragView.setImageResource(R.drawable.bar)
                 }
