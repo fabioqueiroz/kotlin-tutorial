@@ -9,7 +9,7 @@
     tools:context=".DragAndDropFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llTop"
+        android:id="@+id/imageSourceArea"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
@@ -78,10 +78,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llBottom"
+        android:id="@+id/cardAreaOne"
         android:layout_width="204dp"
         android:layout_height="195dp"
-        android:layout_below="@id/llTop"
+        android:layout_below="@id/imageSourceArea"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
         android:background="@android:color/holo_blue_light"
@@ -89,7 +89,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/llBottomTextView"
+            android:id="@+id/cardAreaOneTextView"
             android:layout_width="135dp"
             android:layout_height="31dp"
             android:layout_marginBottom="16dp"
@@ -105,20 +105,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/newDropArea"
+        android:id="@+id/cardAreaTwo"
         android:layout_width="200dp"
         android:layout_height="198dp"
-        android:layout_below="@id/llTop"
+        android:layout_below="@id/imageSourceArea"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="-1dp"
-        android:layout_toRightOf="@id/llBottom"
+        android:layout_toRightOf="@id/cardAreaOne"
         android:layout_weight="1"
         android:background="@android:color/holo_orange_dark"
         android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/newDropAreaTextView"
+            android:id="@+id/cardAreaTwoTextView"
             android:layout_width="147dp"
             android:layout_height="30dp"
             android:layout_marginBottom="16dp"
@@ -134,20 +134,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardBase"
-        android:layout_width="204dp"
-        android:layout_height="195dp"
-        android:layout_below="@id/llTop"
-        android:layout_marginTop="215dp"
+        android:id="@+id/cardAreaThree"
+        android:layout_width="201dp"
+        android:layout_height="189dp"
+        android:layout_below="@id/cardAreaOne"
+        android:layout_marginTop="35dp"
         android:layout_weight="1"
         android:background="@android:color/white"
         android:gravity="center"
         android:orientation="horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/imageDropArea"
-            android:layout_width="188dp"
-            android:layout_height="136dp"
+            android:id="@+id/imageDropAreaThree"
+            android:layout_width="175dp"
+            android:layout_height="127dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="@drawable/custom_border"
@@ -160,11 +160,56 @@
 
         <TextView
             android:id="@+id/cardTextView"
-            android:layout_width="135dp"
-            android:layout_height="31dp"
+            android:layout_width="169dp"
+            android:layout_height="29dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:text="Red Box"
+            android:text="Text area 3"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardAreaFour"
+        android:layout_width="188dp"
+        android:layout_height="191dp"
+        android:layout_below="@id/cardAreaTwo"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="11dp"
+        android:layout_toEndOf="@+id/cardAreaThree"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imageDropAreaFour"
+            android:layout_width="175dp"
+            android:layout_height="127dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cardTextViewFour"
+            android:layout_width="169dp"
+            android:layout_height="29dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:text="Text area 4"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

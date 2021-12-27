@@ -73,10 +73,11 @@ class DragAndDropFragment : Fragment() {
     }
 
     private fun attachOnDragListener() {
-        setDragListenerToArea(binding.llTop)
-        setDragListenerToArea(binding.llBottom)
-        setDragListenerToArea(binding.newDropArea)
-        setDragListenerToArea(binding.imageDropArea)
+        setDragListenerToArea(binding.imageSourceArea)
+        setDragListenerToArea(binding.cardAreaOne)
+        setDragListenerToArea(binding.cardAreaTwo)
+        setDragListenerToArea(binding.imageDropAreaThree)
+        setDragListenerToArea(binding.imageDropAreaFour)
 
         setClickListenerToImage(binding.dragView, "Test ClipData text")
         setClickListenerToImage(binding.dragImageView, "Image view text")
@@ -91,7 +92,7 @@ class DragAndDropFragment : Fragment() {
                 true
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
-                binding.llBottom.alpha = 0.5f
+                binding.cardAreaOne.alpha = 0.5f
                 view.invalidate()
                 true
             }
@@ -101,7 +102,7 @@ class DragAndDropFragment : Fragment() {
                 true
             }
             DragEvent.ACTION_DROP -> {
-                binding.llBottom.alpha = 1.0f
+                binding.cardAreaOne.alpha = 1.0f
                 val item = dragEvent.clipData.getItemAt(0)
                 val dragData = item.text
 
@@ -123,12 +124,12 @@ class DragAndDropFragment : Fragment() {
                     else -> ""
                 }
 
-                if(destination == binding.llBottom && draggedObject == "Black Box" ||
-                    destination == binding.newDropArea && draggedObject == "Ball Image") {
+                if(destination == binding.cardAreaOne && draggedObject == "Black Box" ||
+                    destination == binding.cardAreaTwo && draggedObject == "Ball Image") {
                     Toast.makeText(this@DragAndDropFragment.context, "Correct: $draggedObject", Toast.LENGTH_SHORT).show()
                     //binding.dragView.setImageResource(R.drawable.bar)
                 }
-                else if(destination == binding.llTop) {
+                else if(destination == binding.imageSourceArea) {
                     Toast.makeText(this@DragAndDropFragment.context, "Let's try again!", Toast.LENGTH_SHORT).show()
                 }
                 else {
