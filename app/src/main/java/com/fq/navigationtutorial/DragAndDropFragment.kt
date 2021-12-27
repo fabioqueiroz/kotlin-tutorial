@@ -9,12 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.fq.navigationtutorial.databinding.FragmentDragAndDropBinding
-import com.fq.navigationtutorial.databinding.FragmentSecondBlankBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,35 +54,34 @@ class DragAndDropFragment : Fragment() {
 //        attachOnDragListener()
 //    }
 
+    private fun setClickListenerToImage(imageView: ImageView, dataText: String) {
+        imageView.setOnLongClickListener {
+            val item = ClipData.Item(dataText)
+            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
+            val data = ClipData(dataText, mimeTypes, item)
+
+            val dragShadowBuilder = View.DragShadowBuilder(it)
+            it.startDragAndDrop(data, dragShadowBuilder, it, 0)
+
+            it.visibility = View.INVISIBLE
+            true
+        }
+    }
+
+    private fun setDragListenerToArea(constraintLayout: ConstraintLayout) {
+        constraintLayout.setOnDragListener(dragListener)
+    }
+
     private fun attachOnDragListener() {
-        binding.llTop.setOnDragListener(dragListener)
-        binding.llBottom.setOnDragListener(dragListener)
-        binding.newDropArea.setOnDragListener(dragListener)
+        setDragListenerToArea(binding.llTop)
+        setDragListenerToArea(binding.llBottom)
+        setDragListenerToArea(binding.newDropArea)
+        setDragListenerToArea(binding.imageDropArea)
 
-        binding.dragView.setOnLongClickListener {
-            val clipText = "Test ClipData text"
-            val item = ClipData.Item(clipText)
-            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-            val data = ClipData(clipText, mimeTypes, item)
-
-            val dragShadowBuilder = View.DragShadowBuilder(it)
-            it.startDragAndDrop(data, dragShadowBuilder, it, 0)
-
-            it.visibility = View.INVISIBLE
-            true
-        }
-        binding.dragImageView.setOnLongClickListener {
-            val clipText = "Image view text"
-            val item = ClipData.Item(clipText)
-            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-            val data = ClipData(clipText, mimeTypes, item)
-
-            val dragShadowBuilder = View.DragShadowBuilder(it)
-            it.startDragAndDrop(data, dragShadowBuilder, it, 0)
-
-            it.visibility = View.INVISIBLE
-            true
-        }
+        setClickListenerToImage(binding.dragView, "Test ClipData text")
+        setClickListenerToImage(binding.dragImageView, "Image view text")
+        setClickListenerToImage(binding.dragImageView2, "Orange ball text")
+        setClickListenerToImage(binding.dragCoffeeImageView, "Coffee image text")
     }
 
     private val dragListener = View.OnDragListener { view, dragEvent ->
@@ -115,21 +111,27 @@ class DragAndDropFragment : Fragment() {
                 val owner = v.parent as ViewGroup
                 owner.removeView(v)
 
-                val destination = view as LinearLayout
+                val destination = view as ConstraintLayout //RelativeLayout //LinearLayout
                 destination.addView(v)
                 v.visibility = View.VISIBLE
 
                 var draggedObject = when(dragData.toString()) {
                     "Test ClipData text" -> "Black Box"
                     "Image view text" -> "Ball Image"
+                    "Orange ball text" -> "Orange Ball"
+                    "Coffee image text" -> "Coffee Image"
                     else -> ""
                 }
 
                 if(destination == binding.llBottom && draggedObject == "Black Box" ||
                     destination == binding.newDropArea && draggedObject == "Ball Image") {
                     Toast.makeText(this@DragAndDropFragment.context, "Correct: $draggedObject", Toast.LENGTH_SHORT).show()
-
-                } else {
+                    //binding.dragView.setImageResource(R.drawable.bar)
+                }
+                else if(destination == binding.llTop) {
+                    Toast.makeText(this@DragAndDropFragment.context, "Let's try again!", Toast.LENGTH_SHORT).show()
+                }
+                else {
                     Toast.makeText(this@DragAndDropFragment.context, "Wrong object: $draggedObject", Toast.LENGTH_SHORT).show()
                 }
 

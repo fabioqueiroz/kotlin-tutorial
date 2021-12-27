@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout9"
     android:layout_width="match_parent"
@@ -7,74 +8,171 @@
     android:orientation="vertical"
     tools:context=".DragAndDropFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
         android:background="@android:color/holo_green_dark"
         android:gravity="center"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
-        <View
+        <ImageView
             android:id="@+id/dragView"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginRight="180dp"
-            android:background="@android:color/black" />
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/dragImageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="-50dp"
-            android:src="@drawable/ball2" />
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ball2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dragView"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/dragImageView2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/dragImageView"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@id/dragCoffeeImageView"
+            android:src="@drawable/ball1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/dragCoffeeImageView"
+            app:layout_constraintStart_toEndOf="@+id/dragCoffeeImageView"
+            app:layout_constraintTop_toBottomOf="@+id/dragImageView" />
 
-    <LinearLayout
+        <ImageView
+            android:id="@+id/dragCoffeeImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/dragView"
+            android:layout_gravity="center"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/coffee"
+            android:contentDescription="test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dragView"
+            app:layout_constraintVertical_bias="0.6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llBottom"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:orientation="horizontal"
+        android:layout_width="204dp"
+        android:layout_height="195dp"
+        android:layout_below="@id/llTop"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
         android:background="@android:color/holo_blue_light"
         android:gravity="center"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/llBottomTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_width="135dp"
+            android:layout_height="31dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:text="Black Box"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/newDropArea"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:orientation="horizontal"
+        android:layout_width="200dp"
+        android:layout_height="198dp"
+        android:layout_below="@id/llTop"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="-1dp"
+        android:layout_toRightOf="@id/llBottom"
+        android:layout_weight="1"
         android:background="@android:color/holo_orange_dark"
         android:gravity="center"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/newDropAreaTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_width="147dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:text="Ball Image"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardBase"
+        android:layout_width="204dp"
+        android:layout_height="195dp"
+        android:layout_below="@id/llTop"
+        android:layout_marginTop="215dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imageDropArea"
+            android:layout_width="188dp"
+            android:layout_height="136dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cardTextView"
+            android:layout_width="135dp"
+            android:layout_height="31dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:text="Red Box"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
