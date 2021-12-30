@@ -1,6 +1,7 @@
 package com.fq.navigationtutorial
 
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,6 +42,7 @@ class AnimationFragment : Fragment() {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_animation, container, false)
         binding = FragmentAnimationBinding.inflate(inflater, container, false)
+        //binding.animationSurfaceView.paint.color = Color.WHITE
         return binding.root
     }
 

@@ -9,70 +9,102 @@
     tools:context=".DragAndDropFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/imageSelector"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/imageSelectorButton"
+            android:layout_width="169dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="Select topic"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/imageSelectorSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.796"
+            app:layout_constraintStart_toEndOf="@+id/imageSelectorButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imageSourceArea"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="210dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="50dp"
         android:layout_weight="1"
         android:background="@drawable/custom_solid_border"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/dragView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/dragImageView"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_gravity="center"
             android:layout_marginStart="72dp"
             android:layout_marginTop="16dp"
-            android:background="@android:color/black"
+            android:src="@drawable/golgi"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/dragImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/dragImageView2"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ball2"
+            android:src="@drawable/mitochondria"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dragView"
+            app:layout_constraintStart_toEndOf="@+id/dragImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/dragImageView2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/dragImageView"
+            android:id="@+id/dragImageView4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/dragImageView2"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_toRightOf="@id/dragCoffeeImageView"
-            android:src="@drawable/ball1"
+            android:layout_toRightOf="@id/dragImageView3"
+            android:src="@drawable/nucleus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/dragCoffeeImageView"
-            app:layout_constraintStart_toEndOf="@+id/dragCoffeeImageView"
-            app:layout_constraintTop_toBottomOf="@+id/dragImageView" />
+            app:layout_constraintLeft_toRightOf="@id/dragImageView3"
+            app:layout_constraintStart_toEndOf="@+id/dragImageView3"
+            app:layout_constraintTop_toBottomOf="@+id/dragImageView2" />
 
         <ImageView
-            android:id="@+id/dragCoffeeImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/dragView"
+            android:id="@+id/dragImageView3"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/dragImageView"
             android:layout_gravity="center"
             android:layout_marginStart="72dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="test"
-            android:src="@drawable/coffee"
+            android:src="@drawable/ribosome"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dragView"
+            app:layout_constraintTop_toBottomOf="@+id/dragImageView"
             app:layout_constraintVertical_bias="0.6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -94,7 +126,7 @@
             android:layout_height="127dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/custom_border"
+            android:background="@drawable/custom_dashed_border"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,19 +134,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cardAreaOneTextView"
+        <Button
+            android:id="@+id/cardAreaOneButton"
             android:layout_width="169dp"
-            android:layout_height="29dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:text="Text area 1"
-            android:textSize="20sp"
+            android:text="Question one"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageDropAreaOne"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -138,7 +172,7 @@
             android:layout_height="127dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/custom_border"
+            android:background="@drawable/custom_dashed_border"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -146,14 +180,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cardAreaTwoTextView"
+        <Button
+            android:id="@+id/cardAreaTwoButton"
             android:layout_width="169dp"
-            android:layout_height="29dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:text="Text area 2"
-            android:textSize="20sp"
+            android:text="Question Two"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +201,7 @@
         android:layout_width="204dp"
         android:layout_height="195dp"
         android:layout_below="@id/cardAreaOne"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:background="@android:color/white"
         android:gravity="center"
@@ -179,7 +213,7 @@
             android:layout_height="127dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/custom_border"
+            android:background="@drawable/custom_dashed_border"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -187,14 +221,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cardTextView"
+        <Button
+            android:id="@+id/cardAreaThreeButton"
             android:layout_width="169dp"
-            android:layout_height="29dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:text="Text area 3"
-            android:textSize="20sp"
+            android:text="Question Three"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +244,7 @@
         android:layout_below="@id/cardAreaTwo"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="11dp"
         android:layout_toEndOf="@+id/cardAreaThree"
         android:layout_weight="1"
@@ -224,7 +258,7 @@
             android:layout_height="127dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/custom_border"
+            android:background="@drawable/custom_dashed_border"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -232,14 +266,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cardTextViewFour"
+        <Button
+            android:id="@+id/cardAreaFourButton"
             android:layout_width="169dp"
-            android:layout_height="29dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:text="Text area 4"
-            android:textSize="20sp"
+            android:text="Question Four"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

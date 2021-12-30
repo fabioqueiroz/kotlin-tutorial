@@ -1,19 +1,18 @@
 package com.fq.navigationtutorial
 
+import android.R
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
-import android.view.DragEvent
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import com.fq.navigationtutorial.databinding.FragmentDragAndDropBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +29,8 @@ class DragAndDropFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentDragAndDropBinding
-
+    private lateinit var imageSpinner: Spinner
+    private lateinit var selectedTopic: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,7 @@ class DragAndDropFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        (activity as MainActivity)?.setActionBarTitle("Cell Biology Test")
     }
 
     override fun onCreateView(
@@ -45,16 +46,70 @@ class DragAndDropFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_drag_and_drop, container, false)
         binding = FragmentDragAndDropBinding.inflate(inflater, container, false)
         attachOnDragListener()
+        assignQuestionTexts()
         return binding.root
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        attachOnDragListener()
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        imageSpinner = binding.imageSelectorSpinner
+        setSpinnerLayout(imageSpinner)
+        binding.imageSelectorButton.setOnClickListener {
+//            selectedTopic = imageSpinner.selectedItem.toString()
+//            getImagesByTopic(selectedTopic)
+            getImagesByTopic(imageSpinner.selectedItem.toString())
+        }
+    }
+    //TODO: complete method
+    private fun getImagesByTopic(topic: String) {
+        when(topic) {
+            "Cell organelles" -> setImages(Topic.CELL_ORGANELLES)
+            "Topic 2" -> setImages(Topic.TOPIC_2)
+            "Topic 3" -> setImages(Topic.TOPIC_3)
+            else -> null
+        }
+    }
+    //TODO: complete method
+    private fun setImages(topic: Topic) {
+        var imageOne: ImageView
+        var imageTwo: Drawable?
+        var imageThree: Drawable?
+        var imageFour: Drawable?
+
+        when(topic) {
+            Topic.CELL_ORGANELLES -> {
+                //R.drawable.
+            }
+
+        }
+
+        //binding.dragImageView.setImageResource()
+    }
+
+    //TODO: move to a helper class
+    private fun setSpinnerLayout(spinner: Spinner): Unit {
+        with(spinner)
+        {
+            adapter = adapterFactory(spinner)
+            setSelection(0, false)
+            prompt = "Select the topic"
+            gravity = android.view.Gravity.CENTER
+        }
+    }
+    //TODO: move to a helper class
+    private fun adapterFactory(spinner: Spinner): ArrayAdapter<String> {
+        var spinnerOptions = when(spinner){
+            imageSpinner -> Data.getImageSpinnerOptions()
+            else -> arrayOf()
+        }
+
+        var adapter = ArrayAdapter(spinner.context, R.layout.simple_spinner_item, spinnerOptions)
+        adapter.setDropDownViewResource(R.layout.select_dialog_singlechoice)
+
+        return adapter
+    }
 
     private fun setClickListenerToImage(imageView: ImageView, dataText: String) {
         imageView.setOnLongClickListener {
@@ -81,10 +136,10 @@ class DragAndDropFragment : Fragment() {
         setDragListenerToArea(binding.imageDropAreaThree)
         setDragListenerToArea(binding.imageDropAreaFour)
 
-        setClickListenerToImage(binding.dragView, "Test ClipData text")
-        setClickListenerToImage(binding.dragImageView, "Image view text")
-        setClickListenerToImage(binding.dragImageView2, "Orange ball text")
-        setClickListenerToImage(binding.dragCoffeeImageView, "Coffee image text")
+        setClickListenerToImage(binding.dragImageView, "ImageOneData")
+        setClickListenerToImage(binding.dragImageView2, "ImageTwoData")
+        setClickListenerToImage(binding.dragImageView3, "ImageThreeData")
+        setClickListenerToImage(binding.dragImageView4, "ImageFourData")
     }
 
     private fun setAlphaValue(value: Float) {
@@ -121,28 +176,29 @@ class DragAndDropFragment : Fragment() {
                 val owner = v.parent as ViewGroup
                 owner.removeView(v)
 
-                val destination = view as ConstraintLayout //RelativeLayout //LinearLayout
+                val destination = view as ConstraintLayout
                 destination.addView(v)
                 v.visibility = View.VISIBLE
 
                 var draggedObject = when(dragData.toString()) {
-                    "Test ClipData text" -> "Black Box"
-                    "Image view text" -> "Ball Image"
-                    "Orange ball text" -> "Orange Ball"
-                    "Coffee image text" -> "Coffee Image"
+                    "ImageOneData" -> "Golgi Apparatus"
+                    "ImageTwoData" -> "Mitochondria"
+                    "ImageFourData" -> "Nucleus"
+                    "ImageThreeData" -> "Ribosomes"
                     else -> ""
                 }
 
-                if(destination == binding.imageDropAreaOne && draggedObject == "Black Box" ||
-                    destination == binding.imageDropAreaTwo && draggedObject == "Ball Image") {
-                    Toast.makeText(this@DragAndDropFragment.context, "Correct: $draggedObject", Toast.LENGTH_SHORT).show()
-                    //binding.dragView.setImageResource(R.drawable.bar)
+                if(destination == binding.imageDropAreaOne && draggedObject == "Golgi Apparatus" ||
+                    destination == binding.imageDropAreaTwo && draggedObject == "Mitochondria" ||
+                    destination == binding.imageDropAreaThree && draggedObject == "Ribosomes" ||
+                    destination == binding.imageDropAreaFour && draggedObject == "Nucleus") {
+                    Toast.makeText(this@DragAndDropFragment.context, "Correct, it's the $draggedObject!", Toast.LENGTH_SHORT).show()
                 }
                 else if(destination == binding.imageSourceArea) {
                     Toast.makeText(this@DragAndDropFragment.context, "Let's try again!", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    Toast.makeText(this@DragAndDropFragment.context, "Wrong object: $draggedObject", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DragAndDropFragment.context, "Wrong answer: $draggedObject", Toast.LENGTH_SHORT).show()
                 }
 
                 true
@@ -152,6 +208,26 @@ class DragAndDropFragment : Fragment() {
                 true
             }
             else -> false
+        }
+    }
+
+    private fun assignQuestionTexts() {
+        var data = Data.getDragOptionsQuestions()
+        displayQuestionDialog(binding.cardAreaOneButton, "1. Question One", data[0])
+        displayQuestionDialog(binding.cardAreaTwoButton, "2. Question Two", data[1])
+        displayQuestionDialog(binding.cardAreaThreeButton, "3. Question Three", data[2])
+        displayQuestionDialog(binding.cardAreaFourButton, "3. Question Three", data[3])
+    }
+
+    private fun displayQuestionDialog(button: Button, title: String, message: String) {
+        button.setOnClickListener {
+            val builder = this.context?.let { it -> AlertDialog.Builder(it) }
+            builder?.setTitle(title)
+            builder?.setMessage(message)
+            builder?.setNegativeButton("Close") { dialog, id ->
+                //Toast.makeText(this.context,"No", Toast.LENGTH_SHORT).show()
+            }
+            builder?.show()
         }
     }
 
@@ -174,5 +250,4 @@ class DragAndDropFragment : Fragment() {
                 }
             }
     }
-
 }

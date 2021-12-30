@@ -22,21 +22,23 @@ class AnimationSurfaceView(context: Context?, attrs: AttributeSet?) : SurfaceVie
     var gameOjects = ArrayList<GameOject>()
     //lateinit var ball1: Drawable
 
-    private val myListener =  object : GestureDetector.SimpleOnGestureListener() {
-        override fun onDown(e: MotionEvent): Boolean {
-            return true
-        }
-    }
-    private val detector: GestureDetector = GestureDetector(context, myListener)
+//    private val myListener =  object : GestureDetector.SimpleOnGestureListener() {
+//        override fun onDown(e: MotionEvent): Boolean {
+//            return true
+//        }
+//    }
+//    private val detector: GestureDetector = GestureDetector(context, myListener)
 
     init {
         paint.color = Color.WHITE
         val ball1 = context!!.resources.getDrawable(R.drawable.ball1, null)
-        //ball1 = context!!.resources.getDrawable(R.drawable.ball1, null)
-        gameOjects.add(GameOject(100, 100, 10, 10, ball1))
+        val square = context!!.resources.getDrawable(R.drawable.square, null)
+        gameOjects.add(GameOject(300, 100, 10, 10, ball1))
+        gameOjects.add(GameOject(100, 100, 20, 0, square))
         animationThread = Thread(this)
         animationThread.start()
         surfaceHolder = holder
+        //R.drawable.
     }
 
     override fun run() {
@@ -51,7 +53,8 @@ class AnimationSurfaceView(context: Context?, attrs: AttributeSet?) : SurfaceVie
             canvas.drawRect(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat(), paint)
             for (gameObject in gameOjects)
             {
-                gameObject.move(canvas)
+                //gameObject.move(canvas)
+                gameObject.moveVertically(canvas)
             }
             surfaceHolder.unlockCanvasAndPost(canvas)
 
@@ -84,17 +87,15 @@ class AnimationSurfaceView(context: Context?, attrs: AttributeSet?) : SurfaceVie
 //        return super.onTouchEvent(event)
 //    }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        Log.d("touch", event.toString())
-        return detector.onTouchEvent(event).let { result ->
-            if (!result) {
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    Log.d("event.action ", event.action.toString())
-                    true
-                } else false
-            } else true
-        }
-    }
-
-
+//    override fun onTouchEvent(event: MotionEvent): Boolean {
+//        Log.d("touch", event.toString())
+//        return detector.onTouchEvent(event).let { result ->
+//            if (!result) {
+//                if (event.action == MotionEvent.ACTION_DOWN) {
+//                    Log.d("event.action ", event.action.toString())
+//                    true
+//                } else false
+//            } else true
+//        }
+//    }
 }

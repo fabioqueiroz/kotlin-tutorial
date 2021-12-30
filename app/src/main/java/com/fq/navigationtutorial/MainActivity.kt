@@ -9,4 +9,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         this.title = "Test App"
     }
+
+    fun setActionBarTitle(title: String?) {
+        this.title = title
+    }
 }

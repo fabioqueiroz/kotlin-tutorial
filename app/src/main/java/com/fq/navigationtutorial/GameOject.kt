@@ -24,4 +24,16 @@ open class GameOject(var x:Int, var y:Int, var dx:Int, var dy:Int, var image: Dr
         image.setBounds(x, y, x + width, y + height)
         image.draw(canvas)
     }
+
+    open fun moveVertically(canvas: Canvas) {
+        y += dy
+
+        if (y > (canvas.height - height) || y < 0)
+        {
+            dy = -dy
+        }
+
+        image.setBounds(x, y, x + width, y + height)
+        image.draw(canvas)
+    }
 }
