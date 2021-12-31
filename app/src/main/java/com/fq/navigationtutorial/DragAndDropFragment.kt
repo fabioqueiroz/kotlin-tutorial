@@ -7,13 +7,13 @@ import android.content.ClipDescription
 import android.graphics.drawable.*
 //import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.fq.navigationtutorial.Utilities.TypeName
 import com.fq.navigationtutorial.databinding.FragmentDragAndDropBinding
 
 
@@ -33,7 +33,6 @@ class DragAndDropFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentDragAndDropBinding
     private lateinit var imageSpinner: Spinner
-    private lateinit var selectedTopic: String
     private lateinit var draggableViewModel: DraggableViewModel
     private var draggableModel: DraggableModel? = null
     private lateinit var displayedItems: List<DraggableItem>
@@ -54,10 +53,9 @@ class DragAndDropFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDragAndDropBinding.inflate(inflater, container, false)
         attachOnDragListener()
-        //assignQuestionTexts(Topic.CELL_ORGANELLES)
         return binding.root
     }
-    @SuppressLint("NewApi")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         draggableViewModel = ViewModelProvider(requireActivity()).get(DraggableViewModel::class.java)
@@ -68,8 +66,6 @@ class DragAndDropFragment : Fragment() {
         imageSpinner = binding.imageSelectorSpinner
         setSpinnerLayout(imageSpinner)
         binding.imageSelectorButton.setOnClickListener {
-//            selectedTopic = imageSpinner.selectedItem.toString()
-//            getImagesByTopic(selectedTopic)
             getImagesByTopic(imageSpinner.selectedItem.toString())
         }
     }
@@ -86,7 +82,7 @@ class DragAndDropFragment : Fragment() {
         }
     }
 
-    //TODO: define the topics
+    //TODO: define the topics; move the strings to constants
     private fun getImagesByTopic(topic: String) {
         when(topic) {
             "Cell organelles" -> setImagesAndQuestions(Topic.CELL_ORGANELLES)
@@ -97,37 +93,6 @@ class DragAndDropFragment : Fragment() {
     }
     //TODO: complete method
     private fun setImagesAndQuestions(topic: Topic) {
-//        var imageOne: Int = 0
-//        var imageTwo: Int = 0
-//        var imageThree: Int = 0
-//        var imageFour: Int = 0
-//
-//        when(topic) {
-//            Topic.CELL_ORGANELLES -> {
-//                imageOne = com.fq.navigationtutorial.R.drawable.golgi
-//                imageTwo = com.fq.navigationtutorial.R.drawable.mitochondria
-//                imageThree = com.fq.navigationtutorial.R.drawable.ribosome
-//                imageFour = com.fq.navigationtutorial.R.drawable.nucleus
-//            }
-//            Topic.TOPIC_2 -> {
-//                imageOne = com.fq.navigationtutorial.R.drawable.square
-//                imageTwo = com.fq.navigationtutorial.R.drawable.square
-//                imageThree = com.fq.navigationtutorial.R.drawable.square
-//                imageFour = com.fq.navigationtutorial.R.drawable.square
-//            }
-//            Topic.TOPIC_3 -> {
-//                imageOne = com.fq.navigationtutorial.R.drawable.square
-//                imageTwo = com.fq.navigationtutorial.R.drawable.square
-//                imageThree = com.fq.navigationtutorial.R.drawable.square
-//                imageFour = com.fq.navigationtutorial.R.drawable.square
-//            }
-//        }
-
-//        binding.dragImageView.setImageResource(imageOne)
-//        binding.dragImageView2.setImageResource(imageTwo)
-//        binding.dragImageView3.setImageResource(imageThree)
-//        binding.dragImageView4.setImageResource(imageFour)
-
         displayedItems = filterDraggableItemsByTopic(topic)
         binding.dragImageView.setImageResource(displayedItems[0].image)
         binding.dragImageView2.setImageResource(displayedItems[1].image)
@@ -237,10 +202,7 @@ class DragAndDropFragment : Fragment() {
                     else -> ""
                 }
 
-                if(destination == binding.imageDropAreaOne && draggedObject == displayedItems[0].name || //TODO: UPDATE
-                    destination == binding.imageDropAreaTwo && draggedObject == displayedItems[1].name ||
-                    destination == binding.imageDropAreaThree && draggedObject == displayedItems[2].name ||
-                    destination == binding.imageDropAreaFour && draggedObject == displayedItems[3].name) {
+                if(isAnswerCorrect(destination, draggedObject)) {
 
                     Toast.makeText(this@DragAndDropFragment.context, "Correct, it's the $draggedObject!", Toast.LENGTH_SHORT).show()
                 }
@@ -261,24 +223,16 @@ class DragAndDropFragment : Fragment() {
         }
     }
 
+    private fun isAnswerCorrect(destination: ConstraintLayout, draggedObject: String): Boolean {
+        return  destination == binding.imageDropAreaOne && draggedObject == displayedItems[0].name ||
+                destination == binding.imageDropAreaTwo && draggedObject == displayedItems[1].name ||
+                destination == binding.imageDropAreaThree && draggedObject == displayedItems[2].name ||
+                destination == binding.imageDropAreaFour && draggedObject == displayedItems[3].name
+    }
+
     //TODO: complete
     private fun assignQuestionTexts(topic: Topic) {
         displayedItems = filterDraggableItemsByTopic(topic)
-//        val data: Array<String> = when(topic) {
-//            Topic.CELL_ORGANELLES -> {
-//                Data.getDragOptionsQuestions()
-//            }
-//            Topic.TOPIC_2 -> {
-//                Data.getDragOptionsTwoQuestions()
-//            }
-//            Topic.TOPIC_3 -> {
-//                Data.getDragOptionsThreeQuestions()
-//            }
-//        }
-//        displayQuestionDialog(binding.cardAreaOneButton, "1. Question One", data[0])
-//        displayQuestionDialog(binding.cardAreaTwoButton, "2. Question Two", data[1])
-//        displayQuestionDialog(binding.cardAreaThreeButton, "3. Question Three", data[2])
-//        displayQuestionDialog(binding.cardAreaFourButton, "3. Question Three", data[3])
         displayQuestionDialog(binding.cardAreaOneButton, "1. Question One", displayedItems[0].question)
         displayQuestionDialog(binding.cardAreaTwoButton, "2. Question Two", displayedItems[1].question)
         displayQuestionDialog(binding.cardAreaThreeButton, "3. Question Three", displayedItems[2].question)

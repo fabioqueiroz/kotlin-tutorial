@@ -1,4 +1,4 @@
-package com.fq.navigationtutorial
+package com.fq.navigationtutorial.Utilities
 
 class TypeName {
     companion object {
