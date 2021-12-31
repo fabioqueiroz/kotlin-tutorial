@@ -4,13 +4,16 @@ import android.R
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.*
+//import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.fq.navigationtutorial.databinding.FragmentDragAndDropBinding
 
 
@@ -31,6 +34,9 @@ class DragAndDropFragment : Fragment() {
     private lateinit var binding: FragmentDragAndDropBinding
     private lateinit var imageSpinner: Spinner
     private lateinit var selectedTopic: String
+    private lateinit var draggableViewModel: DraggableViewModel
+    private var draggableModel: DraggableModel? = null
+    private lateinit var displayedItems: List<DraggableItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +54,17 @@ class DragAndDropFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDragAndDropBinding.inflate(inflater, container, false)
         attachOnDragListener()
-        assignQuestionTexts()
+        //assignQuestionTexts(Topic.CELL_ORGANELLES)
         return binding.root
     }
-
+    @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        draggableViewModel = ViewModelProvider(requireActivity()).get(DraggableViewModel::class.java)
+        draggableModel = draggableViewModel.draggableLiveModel.value
+
+        assignQuestionTexts(Topic.CELL_ORGANELLES)
+
         imageSpinner = binding.imageSelectorSpinner
         setSpinnerLayout(imageSpinner)
         binding.imageSelectorButton.setOnClickListener {
@@ -62,30 +73,68 @@ class DragAndDropFragment : Fragment() {
             getImagesByTopic(imageSpinner.selectedItem.toString())
         }
     }
-    //TODO: complete method
+
+    // TODO: ****** COMPLETE TOPICS ***
+    @SuppressLint("NewApi")
+    private fun filterDraggableItemsByTopic(topic: Topic): List<DraggableItem> {
+        return draggableModel!!.draggableItems?.filter {
+            when(topic) {
+                Topic.CELL_ORGANELLES -> it.javaClass.typeName == TypeName.topicOne
+                Topic.TOPIC_2 -> it.javaClass.typeName == TypeName.topicTwo
+                Topic.TOPIC_3 -> it.javaClass.typeName == TypeName.topicThree
+            }
+        }
+    }
+
+    //TODO: define the topics
     private fun getImagesByTopic(topic: String) {
         when(topic) {
-            "Cell organelles" -> setImages(Topic.CELL_ORGANELLES)
-            "Topic 2" -> setImages(Topic.TOPIC_2)
-            "Topic 3" -> setImages(Topic.TOPIC_3)
+            "Cell organelles" -> setImagesAndQuestions(Topic.CELL_ORGANELLES)
+            "Test 2" -> setImagesAndQuestions(Topic.TOPIC_2)
+            "Test 3" -> setImagesAndQuestions(Topic.TOPIC_3)
             else -> null
         }
     }
     //TODO: complete method
-    private fun setImages(topic: Topic) {
-        var imageOne: ImageView
-        var imageTwo: Drawable?
-        var imageThree: Drawable?
-        var imageFour: Drawable?
+    private fun setImagesAndQuestions(topic: Topic) {
+//        var imageOne: Int = 0
+//        var imageTwo: Int = 0
+//        var imageThree: Int = 0
+//        var imageFour: Int = 0
+//
+//        when(topic) {
+//            Topic.CELL_ORGANELLES -> {
+//                imageOne = com.fq.navigationtutorial.R.drawable.golgi
+//                imageTwo = com.fq.navigationtutorial.R.drawable.mitochondria
+//                imageThree = com.fq.navigationtutorial.R.drawable.ribosome
+//                imageFour = com.fq.navigationtutorial.R.drawable.nucleus
+//            }
+//            Topic.TOPIC_2 -> {
+//                imageOne = com.fq.navigationtutorial.R.drawable.square
+//                imageTwo = com.fq.navigationtutorial.R.drawable.square
+//                imageThree = com.fq.navigationtutorial.R.drawable.square
+//                imageFour = com.fq.navigationtutorial.R.drawable.square
+//            }
+//            Topic.TOPIC_3 -> {
+//                imageOne = com.fq.navigationtutorial.R.drawable.square
+//                imageTwo = com.fq.navigationtutorial.R.drawable.square
+//                imageThree = com.fq.navigationtutorial.R.drawable.square
+//                imageFour = com.fq.navigationtutorial.R.drawable.square
+//            }
+//        }
 
-        when(topic) {
-            Topic.CELL_ORGANELLES -> {
-                //R.drawable.
-            }
+//        binding.dragImageView.setImageResource(imageOne)
+//        binding.dragImageView2.setImageResource(imageTwo)
+//        binding.dragImageView3.setImageResource(imageThree)
+//        binding.dragImageView4.setImageResource(imageFour)
 
-        }
+        displayedItems = filterDraggableItemsByTopic(topic)
+        binding.dragImageView.setImageResource(displayedItems[0].image)
+        binding.dragImageView2.setImageResource(displayedItems[1].image)
+        binding.dragImageView3.setImageResource(displayedItems[2].image)
+        binding.dragImageView4.setImageResource(displayedItems[3].image)
 
-        //binding.dragImageView.setImageResource()
+        assignQuestionTexts(topic)
     }
 
     //TODO: move to a helper class
@@ -180,18 +229,19 @@ class DragAndDropFragment : Fragment() {
                 destination.addView(v)
                 v.visibility = View.VISIBLE
 
-                var draggedObject = when(dragData.toString()) {
-                    "ImageOneData" -> "Golgi Apparatus"
-                    "ImageTwoData" -> "Mitochondria"
-                    "ImageFourData" -> "Nucleus"
-                    "ImageThreeData" -> "Ribosomes"
+                var draggedObject = when(dragData.toString()) { //TODO: UPDATE - check against the selected topic
+                    "ImageOneData" -> displayedItems[0].name
+                    "ImageTwoData" -> displayedItems[1].name
+                    "ImageThreeData" -> displayedItems[2].name
+                    "ImageFourData" -> displayedItems[3].name
                     else -> ""
                 }
 
-                if(destination == binding.imageDropAreaOne && draggedObject == "Golgi Apparatus" ||
-                    destination == binding.imageDropAreaTwo && draggedObject == "Mitochondria" ||
-                    destination == binding.imageDropAreaThree && draggedObject == "Ribosomes" ||
-                    destination == binding.imageDropAreaFour && draggedObject == "Nucleus") {
+                if(destination == binding.imageDropAreaOne && draggedObject == displayedItems[0].name || //TODO: UPDATE
+                    destination == binding.imageDropAreaTwo && draggedObject == displayedItems[1].name ||
+                    destination == binding.imageDropAreaThree && draggedObject == displayedItems[2].name ||
+                    destination == binding.imageDropAreaFour && draggedObject == displayedItems[3].name) {
+
                     Toast.makeText(this@DragAndDropFragment.context, "Correct, it's the $draggedObject!", Toast.LENGTH_SHORT).show()
                 }
                 else if(destination == binding.imageSourceArea) {
@@ -211,12 +261,28 @@ class DragAndDropFragment : Fragment() {
         }
     }
 
-    private fun assignQuestionTexts() {
-        var data = Data.getDragOptionsQuestions()
-        displayQuestionDialog(binding.cardAreaOneButton, "1. Question One", data[0])
-        displayQuestionDialog(binding.cardAreaTwoButton, "2. Question Two", data[1])
-        displayQuestionDialog(binding.cardAreaThreeButton, "3. Question Three", data[2])
-        displayQuestionDialog(binding.cardAreaFourButton, "3. Question Three", data[3])
+    //TODO: complete
+    private fun assignQuestionTexts(topic: Topic) {
+        displayedItems = filterDraggableItemsByTopic(topic)
+//        val data: Array<String> = when(topic) {
+//            Topic.CELL_ORGANELLES -> {
+//                Data.getDragOptionsQuestions()
+//            }
+//            Topic.TOPIC_2 -> {
+//                Data.getDragOptionsTwoQuestions()
+//            }
+//            Topic.TOPIC_3 -> {
+//                Data.getDragOptionsThreeQuestions()
+//            }
+//        }
+//        displayQuestionDialog(binding.cardAreaOneButton, "1. Question One", data[0])
+//        displayQuestionDialog(binding.cardAreaTwoButton, "2. Question Two", data[1])
+//        displayQuestionDialog(binding.cardAreaThreeButton, "3. Question Three", data[2])
+//        displayQuestionDialog(binding.cardAreaFourButton, "3. Question Three", data[3])
+        displayQuestionDialog(binding.cardAreaOneButton, "1. Question One", displayedItems[0].question)
+        displayQuestionDialog(binding.cardAreaTwoButton, "2. Question Two", displayedItems[1].question)
+        displayQuestionDialog(binding.cardAreaThreeButton, "3. Question Three", displayedItems[2].question)
+        displayQuestionDialog(binding.cardAreaFourButton, "4. Question Four", displayedItems[3].question)
     }
 
     private fun displayQuestionDialog(button: Button, title: String, message: String) {

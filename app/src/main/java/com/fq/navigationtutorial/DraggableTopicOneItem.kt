@@ -1,0 +1,5 @@
+package com.fq.navigationtutorial
+
+class DraggableTopicOneItem(name: String, image: Int, question: String) : DraggableItem(name, image, question)  {
+
+}

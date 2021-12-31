@@ -27,5 +27,17 @@ class Data {
             "What is the name of a cellular particle made of RNA and protein that serves as the site for protein synthesis in the cell?",
             "Name the eukaryotic organelle which fully enclosed membrane contains the majority of the cell's genetic material:"
         )
+        fun getDragOptionsTwoQuestions() : Array<String> = arrayOf(
+            "test 2",
+            "Which is the organelle responsible for producing cell energy that contains a unique genome?",
+            "What is the name of a cellular particle made of RNA and protein that serves as the site for protein synthesis in the cell?",
+            "Name the eukaryotic organelle which fully enclosed membrane contains the majority of the cell's genetic material:"
+        )
+        fun getDragOptionsThreeQuestions() : Array<String> = arrayOf(
+            "test 3",
+            "Which is the organelle responsible for producing cell energy that contains a unique genome?",
+            "What is the name of a cellular particle made of RNA and protein that serves as the site for protein synthesis in the cell?",
+            "Name the eukaryotic organelle which fully enclosed membrane contains the majority of the cell's genetic material:"
+        )
     }
 }

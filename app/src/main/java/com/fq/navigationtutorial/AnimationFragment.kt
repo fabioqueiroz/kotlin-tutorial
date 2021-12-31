@@ -26,6 +26,7 @@ class AnimationFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentAnimationBinding
     private lateinit var animationSurfaceView: AnimationSurfaceView
+    private var test = R.drawable.ball1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

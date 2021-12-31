@@ -33,6 +33,7 @@ class AnimationSurfaceView(context: Context?, attrs: AttributeSet?) : SurfaceVie
         paint.color = Color.WHITE
         val ball1 = context!!.resources.getDrawable(R.drawable.ball1, null)
         val square = context!!.resources.getDrawable(R.drawable.square, null)
+        val test = R.drawable.coffee
         gameOjects.add(GameOject(300, 100, 10, 10, ball1))
         gameOjects.add(GameOject(100, 100, 20, 0, square))
         animationThread = Thread(this)
